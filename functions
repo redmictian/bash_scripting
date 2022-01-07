@@ -1,0 +1,6 @@
+display () {
+	echo "this is a result named $1"
+}
+echo "Give a name to a function"
+read name
+display $name
