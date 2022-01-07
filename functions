@@ -1,6 +1,9 @@
-display () {
-	echo "this is a result named $1"
+func1 () {
+	echo "this is a result named func1"
 }
-echo "Give a name to a function"
+func2 () {
+	echo "this is a result named func2"
+}
+echo "Call a function"
 read name
-display $name
+func$name
