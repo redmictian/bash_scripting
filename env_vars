@@ -1,0 +1,10 @@
+echo "Enter 1 or 2"
+read number
+if [ $number -eq 1 ] || [ $number -eq 2 ]
+then
+	echo "the number is $number"
+else
+	echo "You didn't type 1 or 2"
+	exit 0
+fi
+exit 1	
