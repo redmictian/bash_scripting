@@ -26,8 +26,8 @@ elif [ $oper == "d" ]
 then
 	divide $frist $second
 else
-	echo "You have entered something wrong"
-	exit 0
+	echo "$oper is not an a, s, m, or d."
+	exit 2
 fi
 echo "Done"
-exit 1
+exit 0
