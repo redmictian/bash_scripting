@@ -1,11 +1,9 @@
 #!/bin/bash
-echo 'path'
-read path_var
-echo 'file name'
-read filename_var
+path_var=$1
+filename_var=$2
 
-[[ -f $path_var/$filename_var ]] && echo "The path to the old file is $(ls -lah $path_var/$filename_var)" || echo "File to change can't be found $(exit)"
-[[ -f ./$filename_var ]] && echo "The new file is $(ls -lah $filename_var)" || echo "The new file can't be found $(exit)"
+[[ -f $path_var/$filename_var ]] && echo "The path to the old file is\n$(ls -lah $path_var/$filename_var)" || echo "File to change can't be found" && exit 1
+[[ -f ./$filename_var ]] && echo "The new file is\n$(ls -lah $filename_var)" || echo "The new file can't be found" && exit 1
 
 read -p "Proceed?" yn
 case $yn in 
@@ -15,14 +13,14 @@ case $yn in
 		exit;;
 	* ) echo invalid response;;
 esac
-echo "Proceeding"
+echo "0. Proceeding"
 
-echo "Creating a backup"
+echo "1. Creating a backup"
 backupname_var=$filename_var-$(date +%Y%m%d)-bkp
-cp $path_var/$filename_var $filename_var-$(date +%Y%m%d-%H:%M)-bkp && echo "Backup created" && ls -lah $backupname_var || echo "Backup failed $(exit)"
+cp $path_var/$filename_var $filename_var-$(date +%Y%m%d-%H:%M)-bkp && echo "Backup created" && ls -lah $backupname_var || echo "Backup failed" && exit 1
 
-echo "Changing permissions"
+echo "2. Changing permissions"
 sudo chmod --reference=$path_var/$filename_var $filename_var && sudo chown --reference=$path_var/$filename_var $filename_var && echo "Done" && ls -lah $filename_var
 
-echo "Replacing an old file with the new"
+echo "3. Replacing an old file with the new"
 sudo mv $filename_var $path_var && ls -lah $path_var/$filename_var && echo "Finished"
