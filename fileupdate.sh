@@ -8,11 +8,12 @@ backupname_var=$filename_var-$(date +%Y%m%d)-bkp
 
 read -p "Proceed?" yn
 case $yn in 
-	[yY] ) echo ok, we will proceed;
+	Yes | yes | y | Y ) echo ok, we will proceed;
 		break;;
-	[nN] ) echo exiting...;
+	No | no | n | N ) echo exiting...;
 		exit;;
-	* ) echo invalid response;;
+	* ) echo invalid response;
+	exit;;
 esac
 echo "0. Proceeding"
 
